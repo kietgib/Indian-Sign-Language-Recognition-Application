@@ -1,0 +1,69 @@
+# Data (raw videos - do not track)
+data/
+*.zip
+*.tar.gz
+
+# Models and Training
+sign_language_detection/models/
+sign_language_detection/logs/
+checkpoints/
+logs/
+*.h5
+*.hdf5
+*.keras
+best_model.h5
+final_model.h5
+
+# Processed data (sequences)
+sequences/
+data/*/sequences/
+*.npy
+*.npz
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+*.ipynb_checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+training.log
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# Old ActionDetectionforSignLanguage folder (if still exists)
+ActionDetectionforSignLanguage/

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSL Recognition Dashboard</title>
+    <!-- Thêm Favicon xịn xò -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- MediaPipe Holistic (Browser CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/holistic/holistic.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="top-nav">
+            <div class="logo">
+                <img src="favicon.svg" alt="VSL Logo" style="width: 38px; height: 38px; margin-right: 12px; filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.4));">
+                <h1>VSL <span>Vision</span></h1>
+            </div>
+            <div class="status-indicator">
+                <span class="pulse"></span> Model: Offline
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <!-- 2 FRAMES FOR VISUALIZATION -->
+            <div class="visualization-area">
+                <!-- Frame 1: Raw Video -->
+                <div class="vis-frame glass-panel">
+                    <div class="frame-header">
+                        <h3><i class="fa-solid fa-video"></i> Raw Camera</h3>
+                    </div>
+                    <div class="frame-content">
+                        <div class="video-feed" id="videoFeed">
+                            <i class="fa-solid fa-video-slash" id="videoPlaceholderIcon"></i>
+                            <p id="videoPlaceholderText">No Video Loaded</p>
+                            <video id="rawVideoPlayer" controls playsinline style="display: none; width: 100%; height: 100%; object-fit: contain;"></video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame 2: Skeleton Only -->
+                <div class="vis-frame glass-panel">
+                    <div class="frame-header">
+                        <h3><i class="fa-solid fa-bone"></i> Skeleton Tracking</h3>
+                        <div class="controls-overlay">
+                            <label class="toggle"><input type="checkbox" id="toggleFace" checked><span class="slider">Face</span></label>
+                            <label class="toggle"><input type="checkbox" id="togglePose" checked><span class="slider">Pose</span></label>
+                            <label class="toggle"><input type="checkbox" id="toggleHands" checked><span class="slider">Hands</span></label>
+                        </div>
+                    </div>
+                    <div class="frame-content skeleton-bg" id="skeletonFeed">
+                        <canvas id="overlayCanvas"></canvas>
+                        <!-- Live Recognition Text -->
+                        <div class="live-subtitle">
+                            <h2 id="liveResult">---</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1 CỘT PANEL -->
+            <div class="side-panel flex-column">
+                <!-- Control Panel -->
+                <div class="control-panel glass-panel">
+                    <h3><i class="fa-solid fa-sliders"></i> Controls</h3>
+                    <div class="btn-group">
+                        <button id="btnStartCamera" class="action-btn primary"><i class="fa-solid fa-play"></i> Start Demo</button>
+                        <button id="btnStopCamera" class="action-btn danger"><i class="fa-solid fa-stop"></i> Stop</button>
+                    </div>
+                    <!-- Upload Data -->
+                    <input type="file" id="fileInput" accept="video/mp4,video/x-m4v,video/*,.npy" style="display: none;">
+                    <button id="btnUploadData" class="action-btn secondary"><i class="fa-solid fa-file-video"></i> Import Media (.mp4 / .npy)</button>
+                    <p id="uploadStatus" style="font-size: 0.8rem; text-align: center; margin-top: 10px; color: var(--text-muted);"></p>
+                </div>
+
+                <!-- Top Predictions -->
+                <div class="predictions-panel glass-panel">
+                    <h3><i class="fa-solid fa-chart-bar"></i> Live Prediction (Top 3)</h3>
+                    <div class="prediction-bars">
+                        <div class="pred-item">
+                            <div class="pred-label"><span>Hello</span> <span>95%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 95%"></div></div>
+                        </div>
+                        <div class="pred-item">
+                            <div class="pred-label"><span>Good_morning</span> <span>68%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 68%"></div></div>
+                        </div>
+                        <div class="pred-item">
+                            <div class="pred-label"><span>Thank_you</span> <span>42%</span></div>
+                            <div class="progress-track"><div class="progress-fill" style="width: 42%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dictionary removed as requested -->
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
