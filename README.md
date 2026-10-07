@@ -1,4 +1,4 @@
-# VSL Recognition - Sign Language Recognition
+# ISL Recognition - Sign Language Recognition
 
 CNN + LSTM model for Sign Language recognition using MediaPipe keypoints.
 
@@ -102,7 +102,7 @@ pip install -r requirements.txt
 
 ```bash
 # 1. Clone/pull code
-cd /home/islabworker2/mya/vsl-recognition
+clone https://github.com/kietgib/Indian-Sign-Language-Recognition-Application.git
 git pull
 
 # 2. Create virtual environment
@@ -156,7 +156,7 @@ python server.py
 *Note: Make sure your `config.py` MODEL_TYPE and the paths inside `server.py` point to your correctly trained `saved_model`.*
 
 ### 2. Open the UI
-Simply open `vsl-web/index.html` in any modern web browser (Edge, Chrome, Firefox).
+Simply open `isl-web/index.html` in any modern web browser (Edge, Chrome, Firefox).
 
 ### 3. Usage
 - Click **Import Media (.mp4 / .npy)** to upload a video.
